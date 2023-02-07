@@ -15,7 +15,7 @@ import javax.swing.SwingConstants;
 import java.awt.*;
 
 public class Presentation {
-	private Main main = new Main();
+	private Data data = new Data();
 	private JFrame frm;
 	private Image image;
 	private DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
@@ -65,35 +65,35 @@ public class Presentation {
 		lblFoto.setBounds(10, 80, 200, 200);
 		frm.getContentPane().add(lblFoto);
 
-		main.generateJSON();
-		main.saveJson();
-		main.getUsersFromJSON();
+		data.generateJSON();
+		data.saveJson();
+		data.getUsersFromJSON();
 		cbUsers.setModel(model);
-		for (int i = 0; i < main.getUsersListSize(); i++) {
-			Result user = main.getUser(i);
-			String name = main.getUserName(user);
+		for (int i = 0; i < data.getUsersListSize(); i++) {
+			Result user = data.getUser(i);
+			String name = data.getUserName(user);
 			model.addElement(name);
 		}
 
 		int index = cbUsers.getSelectedIndex();
-		Result user = main.getUser(index);
-		image = main.getImage(user);
+		Result user = data.getUser(index);
+		image = data.getImage(user);
 		Image newImg = image.getScaledInstance(lblFoto.getWidth(),
 				lblFoto.getHeight(), java.awt.Image.SCALE_SMOOTH);
 		ImageIcon imgIcon = new ImageIcon(newImg);
 		lblFoto.setIcon(imgIcon);
 		taInfosArea.setText(user.toString());
-		taAdmInfos.setText(main.getInfoAdministrativa(user));
+		taAdmInfos.setText(data.getInfoAdministrativa(user));
 
 		cbUsers.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (model.getSize() > 0) {
-					main.getUsersFromJSON();
-					Result user = main.getUserByName(cbUsers.getSelectedItem().toString());
+					data.getUsersFromJSON();
+					Result user = data.getUserByName(cbUsers.getSelectedItem().toString());
 					taInfosArea.setText(user.toString());
-					taAdmInfos.setText(main.getInfoAdministrativa(user));
+					taAdmInfos.setText(data.getInfoAdministrativa(user));
 
-					image = main.getImage(user);
+					image = data.getImage(user);
 					Image newImg = image.getScaledInstance(lblFoto.getWidth(),
 							lblFoto.getHeight(), java.awt.Image.SCALE_SMOOTH);
 					ImageIcon imgIcon = new ImageIcon(newImg);
@@ -105,13 +105,13 @@ public class Presentation {
 		JButton btnCriar = new JButton("Adicionar novo usuário");
 		btnCriar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				main.generateJSON();
-				main.saveJson();
-				main.getUsersFromJSON();
+				data.generateJSON();
+				data.saveJson();
+				data.getUsersFromJSON();
 				int verify = 0;
-				for (int i = 0; i < main.getUsersListSize(); i++) {
-					Result user = main.getUser(i);
-					String name = main.getUserName(user);
+				for (int i = 0; i < data.getUsersListSize(); i++) {
+					Result user = data.getUser(i);
+					String name = data.getUserName(user);
 					if (model.getSize() == 0) {
 						model.addElement(name);
 					}
@@ -125,7 +125,7 @@ public class Presentation {
 					}
 					verify = 0;
 				}
-				cbUsers.setSelectedIndex(main.getUsersListSize() - 1);
+				cbUsers.setSelectedIndex(data.getUsersListSize() - 1);
 				lblFoto.setVisible(true);
 			}
 		});
@@ -135,7 +135,7 @@ public class Presentation {
 		JButton btnApagar = new JButton("Apagar usuários já criados");
 		btnApagar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				main.deleteUsers();
+				data.deleteUsers();
 				model.removeAllElements();
 				lblFoto.setVisible(false);
 				taInfosArea.setText("Nenhum usuário criado ainda");

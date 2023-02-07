@@ -17,14 +17,10 @@ import javax.imageio.ImageIO;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 
-public class Main {
+public class Data {
     private String json;
     private final String usersPath = "RandUserAPI/resources/users.json";
     private HashMap<String, Result> usersList = new HashMap<>();
-
-    public static void main(String[] args) {
-        Presentation.main(null);
-    }
 
     public void generateJSON() {
         final URL url;
