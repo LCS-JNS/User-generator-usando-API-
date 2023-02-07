@@ -1,0 +1,7 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "RandUserAPI/resources/gson-2.10.1.jar",
+        "RandUserAPI/resources/javax.json-1.1.4.jar"
+    ]
+}
