@@ -19,7 +19,7 @@ import java.awt.image.BufferedImage;
 
 public class Data {
     private String json;
-    private final String usersPath = "RandUserAPI/resources/users.json";
+    private final String usersPath = "User-generator-usando-API-/RandUserAPI/resources/users.json";
     private HashMap<String, Result> usersList = new HashMap<>();
 
     public void generateJSON() {
